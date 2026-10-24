@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d14">
+<title>MedVault | MBBS Study Hub</title>
+<style>
+:root{--bg:#0b0d14;--panel:#141824;--panel2:#1b2030;--text:#edf0fa;--muted:#9ba4bb;--accent:#a78bfa;--border:#292f42;--green:#6ee7b7;--red:#fca5a5}
+body.light{--bg:#f4f5fb;--panel:#fff;--panel2:#eceefa;--text:#171a2a;--muted:#626b80;--accent:#7047d7;--border:#dce0ee;--green:#087c55;--red:#c52c40}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;transition:background .2s,color .2s}
+button,input{font:inherit}button{cursor:pointer;background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:9px 13px;border-radius:11px}button:hover{border-color:var(--accent)}
+.primary{background:var(--accent);color:#100b20;border-color:transparent;font-weight:750}.wide{width:100%}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--border);padding:13px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:20px;font-weight:850;letter-spacing:-.7px}.brand span{color:var(--accent)}.small{color:var(--muted);font-size:12px}
+main{width:min(1050px,92%);margin:auto}.hero{padding:48px 0 28px}.eyebrow{color:var(--accent);font-weight:800;font-size:12px;letter-spacing:2px}
+h1{font-size:clamp(34px,8vw,58px);line-height:1.1;letter-spacing:-2px;margin:12px 0}h1 span{color:var(--accent)}.hero p{color:var(--muted);max-width:600px}
+.search-wrap{margin:22px 0}#search{width:100%;padding:15px;border:1px solid var(--border);border-radius:14px;color:var(--text);background:var(--panel);outline:none}#search:focus{border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 35px}.stat{padding:15px 10px;background:var(--panel);border:1px solid var(--border);border-radius:15px}.stat strong{display:block;font-size:21px}.stat span{color:var(--muted);font-size:12px}
+.section-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:32px 0 15px}h2{font-size:23px;margin:0}h3{margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}.card{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:19px;min-width:0}.card p{color:var(--muted);font-size:14px}.subject-icon{font-size:27px;margin-bottom:9px}
+.tag{display:inline-block;color:var(--accent);background:var(--panel2);padding:4px 9px;border-radius:7px;font-size:11px;margin-bottom:10px}.card button{margin-top:7px}
+#reader,#quizArea{display:none;margin-top:25px}.back{margin-bottom:15px}.note-content h3{margin-top:22px}.note-content p,.note-content li{color:var(--muted)}.note-content li{margin-bottom:8px}
+.callout{background:var(--panel2);border-left:3px solid var(--accent);padding:13px;border-radius:8px;margin:15px 0}
+.quiz-option{display:block;width:100%;text-align:left;margin:10px 0;padding:13px}.quiz-option.correct{border-color:var(--green)}.quiz-option.wrong{border-color:var(--red)}
+#feedback{min-height:25px;color:var(--accent)}footer{text-align:center;color:var(--muted);font-size:12px;padding:40px 10px 25px}.hidden{display:none!important}
+@media(max-width:480px){header{padding:11px 4%}.brand{font-size:17px}header button{padding:8px}.hero{padding-top:35px}.stats{gap:7px}.stat{padding:12px 7px}.stat strong{font-size:18px}.stat span{font-size:10px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">Med<span>Vault</span> ✦</div><div class="small">MBBS STUDY HUB</div></div><button id="themeBtn" aria-label="Toggle theme">☀️ Theme</button></header>
+<main>
+<section class="hero" id="home">
+<div class="eyebrow">YOUR MEDICAL LEARNING SPACE</div><h1>Study smarter.<br><span>Think clinically.</span></h1>
+<p>Your personal MBBS study hub for first-year concepts, practical revision, and quick knowledge checks.</p>
+<div class="search-wrap"><input id="search" type="search" placeholder="Search subjects, notes or topics..." aria-label="Search study materials"></div>
+<div class="stats"><div class="stat"><strong>06</strong><span>Study sections</span></div><div class="stat"><strong>24/7</strong><span>Revision access</span></div><div class="stat"><strong>∞</strong><span>Curiosity</span></div></div>
+</section>
+<section id="subjectsSection">
+<div class="section-heading"><h2>Explore the vault</h2><span class="small">FIRST YEAR MBBS</span></div>
+<div class="grid" id="subjectGrid">
+<article class="card subject" data-search="anatomy gross anatomy osteology bones muscles"><div class="subject-icon">🦴</div><span class="tag">SUBJECT 01</span><h3>Anatomy</h3><p>Structure of the human body, bones, muscles and organs.</p><button class="wide" data-open="anatomy">Open notes ↗</button></article>
+<article class="card subject" data-search="physiology rmp membrane transport blood"><div class="subject-icon">🫀</div><span class="tag">SUBJECT 02</span><h3>Physiology</h3><p>Normal body functions, homeostasis and mechanisms.</p><button class="wide" data-open="physiology">Open notes ↗</button></article>
+<article class="card subject" data-search="biochemistry enzymes proteins carbohydrates"><div class="subject-icon">🧪</div><span class="tag">SUBJECT 03</span><h3>Biochemistry</h3><p>Biomolecules, enzymes, metabolism and clinical links.</p><button class="wide" data-open="biochemistry">Open notes ↗</button></article>
+<article class="card subject" data-search="histology tissues microscope epithelium"><div class="subject-icon">🔬</div><span class="tag">SUBJECT 04</span><h3>Histology</h3><p>Microscopic structure of tissues and organs.</p><button class="wide" data-open="histology">Open notes ↗</button></article>
+<article class="card subject" data-search="practicals laboratory experiments viva"><div class="subject-icon">🥼</div><span class="tag">SUBJECT 05</span><h3>Practicals</h3><p>Laboratory concepts, practical records and viva revision.</p><button class="wide" data-open="practicals">Open notes ↗</button></article>
+<article class="card subject" data-search="quick revision flashcards high yield recall"><div class="subject-icon">⚡</div><span class="tag">SUBJECT 06</span><h3>Quick Revision</h3><p>Short summaries and key facts for rapid recall.</p><button class="wide" data-open="revision">Open notes ↗</button></article>
+</div><p id="noResults" class="small hidden">No matching sections found.</p>
+</section>
+<section id="reader" class="card"><button class="back" id="backBtn">← Back to subjects</button><span class="tag">STUDY NOTES</span><h2 id="noteTitle">Notes</h2><div id="noteContent" class="note-content"></div><div class="callout">These are introductory revision notes. Verify detailed facts, diagrams and clinical guidance with your recommended textbooks and current teaching material.</div></section>
+<section id="quizArea" class="card"><button class="back" id="exitQuiz">← Exit quiz</button><span class="tag">KNOWLEDGE CHECK</span><h2>🧠 MBBS Quiz</h2><p id="quizProgress" class="small"></p><h3 id="question"></h3><div id="options"></div><p id="feedback" aria-live="polite"></p><p id="score"></p><button class="primary wide" id="nextBtn" disabled>Next question →</button></section>
+<section id="quizLaunch"><div class="section-heading"><h2>Test your knowledge</h2></div><div class="card"><div class="subject-icon">🧠</div><h3>Quick MBBS Quiz</h3><p>Practice basic first-year medical science questions and learn from the explanations.</p><button class="primary" id="startQuiz">Start quiz →</button></div></section>
+</main>
+<footer><div class="brand">Med<span>Vault</span> ✦</div><p>Learn • Revise • Repeat</p><p>Independent student project. Not an official UCMS website.</p></footer>
+<script>
+"use strict";
+const notes={
+anatomy:{title:"🦴 Anatomy",html:`<h3>What is Anatomy?</h3><p>Anatomy is the study of the structure of the human body and relationships between its parts.</p><h3>Major branches</h3><ul><li><b>Gross anatomy:</b> Structures visible to the unaided eye.</li><li><b>Histology:</b> Microscopic study of tissues.</li><li><b>Embryology:</b> Study of development before birth.</li><li><b>Neuroanatomy:</b> Structure of the nervous system.</li><li><b>Radiological anatomy:</b> Anatomy studied using medical imaging.</li></ul><h3>Directional terms</h3><ul><li><b>Superior:</b> Toward the head.</li><li><b>Inferior:</b> Toward the feet.</li><li><b>Anterior:</b> Toward the front.</li><li><b>Posterior:</b> Toward the back.</li><li><b>Medial:</b> Toward the midline.</li><li><b>Lateral:</b> Away from the midline.</li><li><b>Proximal:</b> Closer to the trunk or origin.</li><li><b>Distal:</b> Farther from the trunk or origin.</li></ul><div class="callout">Study the anatomical position first: standing upright, face forward, arms by the sides, palms facing forward.</div>`},
+physiology:{title:"🫀 Physiology",html:`<h3>What is Physiology?</h3><p>Physiology studies how cells, tissues, organs and body systems function.</p><h3>Homeostasis</h3><p>Homeostasis maintains a relatively stable internal environment despite external changes.</p><ul><li><b>Receptor:</b> Detects a change.</li><li><b>Control centre:</b> Processes information.</li><li><b>Effector:</b> Produces a response.</li></ul><h3>Resting membrane potential</h3><p>The resting membrane potential is the voltage difference across a cell membrane at rest. It depends on ion gradients, selective membrane permeability and the Na⁺/K⁺ pump's contribution to ion gradients.</p><h3>Transport across membranes</h3><ul><li><b>Simple diffusion:</b> Movement down a concentration gradient without a carrier.</li><li><b>Facilitated diffusion:</b> Passive transport using a channel or carrier.</li><li><b>Active transport:</b> Transport requiring energy directly or indirectly.</li><li><b>Osmosis:</b> Net movement of water across a selectively permeable membrane.</li></ul>`},
+biochemistry:{title:"🧪 Biochemistry",html:`<h3>What is Biochemistry?</h3><p>Biochemistry studies the chemical substances and reactions that support life.</p><h3>Major biomolecules</h3><ul><li><b>Carbohydrates:</b> Important energy sources and structural components.</li><li><b>Proteins:</b> Structural molecules, enzymes, receptors and transporters.</li><li><b>Lipids:</b> Energy storage and membrane components.</li><li><b>Nucleic acids:</b> DNA stores genetic information; RNA has roles in gene expression.</li></ul><h3>Enzymes</h3><p>Enzymes are biological catalysts that increase reaction rates without being consumed overall.</p><ul><li>Substrate binds at the enzyme's active site.</li><li>Enzymes lower activation energy.</li><li>Temperature, pH, substrate concentration and inhibitors can affect activity.</li></ul><div class="callout">For exams, practise enzyme classification, cofactors, competitive inhibition and Michaelis–Menten concepts from your prescribed textbook.</div>`},
+histology:{title:"🔬 Histology",html:`<h3>What is Histology?</h3><p>Histology is the microscopic study of tissues.</p><h3>Four basic tissue types</h3><ul><li><b>Epithelial tissue:</b> Covers surfaces, lines cavities and forms glands.</li><li><b>Connective tissue:</b> Supports, binds and protects; includes bone, cartilage, blood and adipose tissue.</li><li><b>Muscle tissue:</b> Produces contraction; skeletal, cardiac and smooth muscle.</li><li><b>Nervous tissue:</b> Neurons and supporting glial cells.</li></ul><h3>Microscope study tips</h3><ul><li>Start at low magnification to identify overall organisation.</li><li>Look for nuclei, cell arrangement and extracellular material.</li><li>Identify distinguishing features before naming a tissue.</li><li>Practise labelled diagrams using your actual slides and teaching material.</li></ul>`},
+practicals:{title:"🥼 Practicals",html:`<h3>Practical preparation</h3><p>Use your department's current practical manual and follow laboratory safety instructions.</p><h3>Before a practical</h3><ul><li>Know the aim and principle of the experiment.</li><li>Learn the equipment and reagents used.</li><li>Understand the procedure and relevant precautions.</li><li>Know how observations are recorded and interpreted.</li></ul><h3>Viva preparation</h3><ul><li>Define the key term in one clear sentence.</li><li>Explain the principle before describing steps.</li><li>Understand why each reagent or instrument is used.</li><li>Review common sources of error and limitations.</li></ul><div class="callout">For clinical laboratory work, follow your instructor's protocol. Do not perform experiments or handle specimens without supervision.</div>`},
+revision:{title:"⚡ Quick Revision",html:`<h3>Active recall</h3><p>Close your notes and try to explain a concept from memory. Then check and correct your answer.</p><h3>Spaced repetition</h3><ul><li>Review a topic the same day.</li><li>Test yourself again after a short interval.</li><li>Revisit difficult material over the next several days.</li><li>Mix older topics with new ones.</li></ul><h3>Build a one-page summary</h3><ul><li>Definitions and key mechanisms.</li><li>Tables comparing similar concepts.</li><li>Simple labelled diagrams.</li><li>Questions you answered incorrectly.</li></ul><h3>Study session template</h3><p>Learn a small topic → recall without notes → check mistakes → answer practice questions → schedule a review.</p>`}
+};
+
+const $=id=>document.getElementById(id);
+const subjectCards=[...document.querySelectorAll(".subject")];
+const reader=$("reader"), quizArea=$("quizArea"), quizLaunch=$("quizLaunch");
+function hidePanels(){reader.style.display="none";quizArea.style.display="none";quizLaunch.style.display="block";$("subjectsSection").style.display="block";$("home").style.display="block";}
+function openNotes(key){
+ const item=notes[key]; if(!item)return;
+ $("noteTitle").textContent=item.title;$("noteContent").innerHTML=item.html;
+ reader.style.display="block";quizArea.style.display="none";quizLaunch.style.display="none";
+ $("subjectsSection").style.display="none";$("home").style.display="none";
+ reader.scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.querySelectorAll("[data-open]").forEach(btn=>btn.addEventListener("click",()=>openNotes(btn.dataset.open)));
+$("backBtn").addEventListener("click",()=>{hidePanels();$("home").scrollIntoView({behavior:"smooth"});});
+$("themeBtn").addEventListener("click",()=>{
+ document.body.classList.toggle("light");
+ $("themeBtn").textContent=document.body.classList.contains("light")?"🌙 Dark":"☀️ Theme";
+});
+$("search").addEventListener("input",e=>{
+ const q=e.target.value.trim().toLowerCase();let count=0;
+ subjectCards.forEach(card=>{
+  const match=(card.innerText+" "+card.dataset.search).toLowerCase().includes(q);
+  card.classList.toggle("hidden",!match);if(match)count++;
+ });
+ $("noResults").classList.toggle("hidden",count!==0);
+});
+
+const quizQuestions=[
+{q:"Which organelle is the main site of ATP production during aerobic respiration?",o:["Lysosome","Mitochondrion","Golgi apparatus","Ribosome"],a:1,e:"Mitochondria host the citric acid cycle and oxidative phosphorylation."},
+{q:"Which tissue lines many body surfaces and cavities?",o:["Epithelial tissue","Nervous tissue","Cardiac muscle","Bone"],a:0,e:"Epithelial tissue covers surfaces, lines cavities and forms glands."},
+{q:"Which ion is most important for the rising phase of a typical neuronal action potential?",o:["Sodium","Chloride","Calcium only","Phosphate"],a:0,e:"Rapid opening of voltage-gated sodium channels allows sodium influx."},
+{q:"Which biomolecule contains amino acids as its building blocks?",o:["Protein","Glycogen","DNA","Triglyceride"],a:0,e:"Proteins are chains of amino acids joined by peptide bonds."},
+{q:"In anatomical terminology, 'medial' means:",o:["Toward the midline","Toward the feet","Toward the back","Away from the surface"],a:0,e:"Medial means closer to the body's midline."},
+{q:"What is the primary role of an enzyme?",o:["Increase activation energy","Act as a biological catalyst","Become the final product","Stop all reactions"],a:1,e:"Enzymes increase reaction rates by lowering activation energy."},
+{q:"Which process describes net water movement across a selectively permeable membrane?",o:["Osmosis","Phagocytosis","Transcription","Translation"],a:0,e:"Osmosis is the net movement of water across a selectively permeable membrane."},
+{q:"Which is a type of muscle tissue found in the heart?",o:["Smooth","Skeletal","Cardiac","Epithelial"],a:2,e:"Cardiac muscle forms the contractile tissue of the heart."}
+];
+let quizIndex=0,quizScore=0,answered=false;
+function startQuiz(){
+ quizIndex=0;quizScore=0;answered=false;
+ $("subjectsSection").style.display="none";$("home").style.display="none";reader.style.display="none";quizLaunch.style.display="none";quizArea.style.display="block";
+ renderQuestion();quizArea.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderQuestion(){
+ const item=quizQuestions[quizIndex];answered=false;
+ $("quizProgress").textContent=`Question ${quizIndex+1} of ${quizQuestions.length}`;
+ $("question").textContent=item.q;$("options").replaceChildren();$("feedback").textContent="";
+ $("score").textContent=`Score: ${quizScore}`;$("nextBtn").disabled=true;
+ $("nextBtn").textContent=quizIndex===quizQuestions.length-1?"See results →":"Next question →";
+ item.o.forEach((option,i)=>{
+  const b=document.createElement("button");b.className="quiz-option";b.textContent=String.fromCharCode(65+i)+". "+option;b.addEventListener("click",()=>chooseAnswer(i,b));$("options").appendChild(b);
+ });
+}
+function chooseAnswer(i,button){
+ if(answered)return;answered=true;const item=quizQuestions[quizIndex];
+ [...$("options").children].forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add("correct");});
+ if(i===item.a){quizScore++;$("feedback").textContent="Correct! "+item.e;}
+ else{button.classList.add("wrong");$("feedback").textContent="Not quite. "+item.e;}
+ $("score").textContent=`Score: ${quizScore}`;$("nextBtn").disabled=false;
+}
+$("startQuiz").addEventListener("click",startQuiz);
+$("exitQuiz").addEventListener("click",()=>{hidePanels();$("home").scrollIntoView({behavior:"smooth"});});
+$("nextBtn").addEventListener("click",()=>{
+ if(!answered)return;
+ if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuestion();return;}
+ $("quizProgress").textContent="Quiz complete";
+ $("question").textContent=`You scored ${quizScore} out of ${quizQuestions.length}`;
+ $("options").replaceChildren();
+ $("feedback").textContent=quizScore===quizQuestions.length?"Excellent work!":quizScore>=5?"Good effort! Review the explanations and try again.":"Keep practising. Review the notes and retry.";
+ $("score").textContent=`${Math.round(quizScore/quizQuestions.length*100)}%`;
+ $("nextBtn").disabled=false;$("nextBtn").textContent="Try again ↻";
+ $("nextBtn").onclick=()=>{ $("nextBtn").onclick=null;startQuiz(); };
+});
+</script>
+</body>
+</html>
